@@ -221,7 +221,18 @@ html[data-theme="dark"] .eyebrow{color:var(--teal)}
 }
 .service-card:hover{background:var(--surface)}
 .service-card span{font-size:.7rem;color:var(--muted)}
-.service-card h3{font:600 1.35rem Manrope;margin:3.8rem 0 .5rem}
+.service-image{
+  display:block;
+  width:100%;
+  aspect-ratio:4/3;
+  height:auto;
+  margin:1rem 0 1.25rem;
+  object-fit:contain;
+  background:var(--surface-soft);
+  transition:transform .25s ease;
+}
+.service-card:hover .service-image{transform:scale(1.02)}
+.service-card h3{font:600 1.35rem Manrope;margin:0 0 .5rem}
 .service-card p,.trust-grid p,.consultation-copy>p{
   color:var(--muted);
   font-size:.92rem;
@@ -241,7 +252,27 @@ html[data-theme="dark"] .eyebrow{color:var(--teal)}
 }
 .trust-grid b{font-size:.7rem;color:var(--teal-deep)}
 html[data-theme="dark"] .trust-grid b{color:var(--teal)}
-.trust-grid h3{font:600 1.1rem Manrope;margin:3.5rem 0 .6rem}
+.trust-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
+.trust-icon{
+  width:92px;
+  height:92px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:50%;
+  color:var(--teal-deep);
+}
+html[data-theme="dark"] .trust-icon{color:var(--teal)}
+.trust-icon svg{
+  width:46px;
+  height:46px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.trust-grid h3{font:600 1.1rem Manrope;margin:1.25rem 0 .6rem}
 .split{display:flex;justify-content:space-between;align-items:end;gap:2rem}
 .section-note{max-width:300px;color:var(--muted);font-size:.9rem}
 .photo-carousel{
@@ -342,7 +373,15 @@ html[data-theme="dark"] .trust-grid b{color:var(--teal)}
   align-items:center;
   background:var(--surface);
 }
-.consultation-media{min-height:580px}
+.consultation-media{min-height:580px;position:relative;overflow:hidden}
+.consultation-media img{
+  display:block;
+  width:100%;
+  height:100%;
+  position:absolute;
+  inset:0;
+  object-fit:cover;
+}
 .consultation-copy h2{
   font:600 clamp(2.8rem,5vw,5rem) Manrope;
   line-height:.95;
@@ -363,13 +402,22 @@ html[data-theme="dark"] .trust-grid b{color:var(--teal)}
   text-decoration:none;
   color:inherit;
 }
-.contact-grid small{
+.contact-icon{
   display:block;
-  font-size:.65rem;
-  letter-spacing:.14em;
-  color:var(--muted);
+  width:25px;
+  height:25px;
   margin-bottom:1.5rem;
 }
+.contact-icon svg{
+  width:100%;
+  height:100%;
+  fill:none;
+  stroke:var(--teal-deep);
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+html[data-theme="dark"] .contact-icon svg{stroke:var(--teal)}
 .contact-grid strong{font:500 1rem Manrope}
 .contact-grid a:hover strong{text-decoration:underline}
 footer{
@@ -405,9 +453,10 @@ footer em{font-weight:400;font-style:normal;color:var(--teal)}
   .hero-media{min-height:55vh}
   .service-grid{grid-template-columns:1fr}
   .service-card{min-height:210px}
+  .service-image{aspect-ratio:4/3}
   .trust-grid{grid-template-columns:1fr}
   .trust-grid article{min-height:180px}
-  .trust-grid h3{margin-top:2.5rem}
+  .trust-grid h3{margin-top:1.25rem}
   .split{display:block}
   .section-note{margin-top:1.5rem}
   .photo-carousel{min-height:60vh}
