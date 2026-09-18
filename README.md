@@ -28,3 +28,43 @@ The theme toggle is in the top-right header. The selected mode is stored in `loc
 
 The hero image is marked high priority. Below-the-fold portfolio images should remain lazy-loaded when real R2 images are inserted. Reels should use short MP4/H.264 files with posters and `preload="none"`.
 
+## Phase 1: R2-powered portfolio media
+
+The public website now fetches its editable portfolio configuration once from:
+
+`https://media.urbanrangcraft.com/content.json`
+
+That file controls the hero image, the project carousel, and the reels. Media paths in the file are relative to `content.json`, so `images/project-01.webp` resolves to `https://media.urbanrangcraft.com/images/project-01.webp`.
+
+### Upload to R2
+
+Create this object layout in the R2 bucket connected to `media.urbanrangcraft.com`:
+
+```text
+content.json
+images/
+  molding.jpg
+  painting.jpeg
+  wallpaper.jpg
+  ceiling.jpg
+  falseCeiling.jpg
+  renovation.jpg
+videos/ (optional, add when reels are ready)
+  reel-01.mp4
+  reel-02.mp4
+  reel-03.mp4
+```
+
+The repository's [content.json](content.json) is the starter manifest. Upload that file to the bucket root after confirming that the listed media filenames match the R2 objects. Edit only the manifest to change the order, labels, or media shown on the live site. If no reels are available, set `"reels": []`; the website then hides the reels section.
+
+Each project needs `src`; `alt` and `title` are recommended. Each reel needs `src`; `poster` and `title` are recommended. The website keeps its built-in placeholder content if the manifest is temporarily unavailable.
+
+### Required R2 CORS rule
+
+Because the Vercel site fetches the manifest from a different origin, allow `GET` and `HEAD` requests from `https://urbanrangcraft.com` (and `https://www.urbanrangcraft.com` if that hostname is used) in the R2 bucket CORS configuration. During preview testing, add the exact Vercel preview origin too. No R2 credentials are used or exposed by the public site.
+
+### Performance behaviour
+
+The browser makes one request for `content.json`. Project images use lazy loading and asynchronous decoding. Reel videos use `preload="none"`, so their video data is not downloaded until a visitor chooses to play one.
+
+Phase 1 does not add a Worker, Cloudflare Access, an admin interface, or upload/delete operations. Those remain for later phases.
