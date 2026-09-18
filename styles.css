@@ -352,6 +352,15 @@ html[data-theme="dark"] .trust-icon{color:var(--teal)}
   flex:0 0 min(280px,72vw);
   aspect-ratio:9/14;
   scroll-snap-align:start;
+  position:relative;
+  overflow:hidden;
+}
+.reel-card video{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  background:var(--surface-soft);
 }
 .reel-card span{color:#fff}
 .reel-card small{

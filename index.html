@@ -31,7 +31,7 @@
   </header>
 
   <main>
-    <section class="hero section-pad">
+    <section class="hero section-pad" data-content-url="https://media.urbanrangcraft.com/content.json">
       <div class="hero-copy">
         <p class="eyebrow">HOME RENOVATION &amp; FINISHING</p>
         <h1>Spaces that<br><em>feel like yours.</em></h1>
@@ -47,6 +47,7 @@
       </div>
       <div class="hero-media">
         <img
+          id="hero-image"
           src="assets/images/molding.jpg"
           alt="Urbanrang Craft living room renovation project"
         >
@@ -91,7 +92,7 @@
         <div><p class="eyebrow">03 / OUR WORK</p><h2>See the<br><em>craft.</em></h2></div>
         <p class="section-note">A small selection for now. More projects coming soon.</p>
       </div>
-      <div class="photo-carousel" aria-label="Project gallery">
+      <div class="photo-carousel" aria-label="Project gallery" aria-live="polite">
         <div class="photo-slide active image-placeholder"><span>PROJECT 01 · LIVING ROOM</span></div>
         <div class="photo-slide image-placeholder"><span>PROJECT 02 · FEATURE WALL</span></div>
         <div class="photo-slide image-placeholder"><span>PROJECT 03 · BEDROOM</span></div>
@@ -104,17 +105,12 @@
       </div>
     </section>
 
-    <section class="reels-section section-pad">
+    <section class="reels-section section-pad" hidden>
       <div class="section-heading split">
         <div><p class="eyebrow">04 / REELS</p><h2>Watch the<br><em>process.</em></h2></div>
         <p class="section-note">Short clips of work in progress, details and final reveals.</p>
       </div>
-      <div class="reel-track">
-        <article class="reel-card image-placeholder"><span>01 · PAINTING PROCESS</span><small>▶</small></article>
-        <article class="reel-card image-placeholder"><span>02 · MOULDING DETAIL</span><small>▶</small></article>
-        <article class="reel-card image-placeholder"><span>03 · FINAL REVEAL</span><small>▶</small></article>
-        <article class="reel-card image-placeholder"><span>04 · BEFORE → AFTER</span><small>▶</small></article>
-      </div>
+      <div class="reel-track" id="reel-track"></div>
     </section>
 
     <section class="consultation section-pad">
