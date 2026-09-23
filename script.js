@@ -66,6 +66,22 @@ function renderProjects(projects, contentUrl) {
   setupCarousel();
 }
 
+function renderServiceImages(services, contentUrl) {
+  document.querySelectorAll("[data-service-image]").forEach((image) => {
+    const service = services[image.dataset.serviceImage];
+    if (!service || typeof service.src !== "string") return;
+    image.src = resolveAsset(service.src, contentUrl);
+    image.alt = service.alt || image.alt;
+  });
+}
+
+function renderConsultationImage(consultation, contentUrl) {
+  if (!consultation || typeof consultation.src !== "string") return;
+  const image = document.getElementById("consultation-image");
+  image.src = resolveAsset(consultation.src, contentUrl);
+  image.alt = consultation.alt || image.alt;
+}
+
 function renderReels(reels, contentUrl) {
   const reelTrack = document.getElementById("reel-track");
   const reelsSection = reelTrack.closest(".reels-section");
@@ -102,6 +118,8 @@ async function loadPortfolioContent() {
       heroImage.src = resolveAsset(content.hero.src, contentUrl);
       heroImage.alt = content.hero.alt || heroImage.alt;
     }
+    if (content.services && typeof content.services === "object") renderServiceImages(content.services, contentUrl);
+    renderConsultationImage(content.consultation, contentUrl);
     if (Array.isArray(content.projects) && content.projects.length) renderProjects(content.projects, contentUrl);
     if (Array.isArray(content.reels)) renderReels(content.reels, contentUrl);
   } catch (error) {
