@@ -77,7 +77,10 @@ function renderServiceImages(services, contentUrl) {
 
 function renderConsultationImage(consultation, contentUrl) {
   if (!consultation || typeof consultation.src !== "string") return;
+
   const image = document.getElementById("consultation-image");
+  if (!image) return;
+
   image.src = resolveAsset(consultation.src, contentUrl);
   image.alt = consultation.alt || image.alt;
 }
@@ -120,7 +123,7 @@ async function loadPortfolioContent() {
     }
     if (content.services && typeof content.services === "object") renderServiceImages(content.services, contentUrl);
     renderConsultationImage(content.consultation, contentUrl);
-    if (Array.isArray(content.projects) && content.projects.length) renderProjects(content.projects, contentUrl);
+    if (Array.isArray(content.projects)) renderProjects(content.projects, contentUrl);
     if (Array.isArray(content.reels)) renderReels(content.reels, contentUrl);
   } catch (error) {
     console.warn("Portfolio content could not be loaded. Showing built-in fallback content.", error);
