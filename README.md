@@ -34,7 +34,7 @@ The public website now fetches its editable portfolio configuration once from:
 
 `https://media.urbanrangcraft.com/content.json`
 
-That file controls the hero image, the project carousel, and the reels. Media paths in the file are relative to `content.json`, so `images/project-01.webp` resolves to `https://media.urbanrangcraft.com/images/project-01.webp`.
+That file controls the hero image, service-card images, consultation image, project carousel, and reels. Media paths in the file are relative to `content.json`, so `images/project-01.webp` resolves to `https://media.urbanrangcraft.com/images/project-01.webp`.
 
 ### Upload to R2
 
@@ -68,3 +68,7 @@ Because the Vercel site fetches the manifest from a different origin, allow `GET
 The browser makes one request for `content.json`. Project images use lazy loading and asynchronous decoding. Reel videos use `preload="none"`, so their video data is not downloaded until a visitor chooses to play one.
 
 Phase 1 does not add a Worker, Cloudflare Access, an admin interface, or upload/delete operations. Those remain for later phases.
+
+## Phase 2: Worker scaffold
+
+The [worker](worker) directory contains the minimal Cloudflare Worker API scaffold and an R2 binding for the `urban-rang-craft` bucket. It provides read-only `GET /api/content` and `GET /api/media` routes. All mutation methods are explicitly rejected until Phase 3 protects the Worker with Cloudflare Access.
